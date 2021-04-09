@@ -25,12 +25,9 @@ jobs:
         run: cd testrepo; composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
 
       - name: Install dependencies with composer
-        env:
-            API_SECRET: ${{ secrets.API_SECRET }}
         run: |
-          curl -vv \
-          -F "key=$API_SECRET" \
+          curl -v \
+          -F "key=${{ secrets.API_SECRET }}" \
           -X POST \
           -F "ModuleVersionUpload[zipFile]=@testrepo.zip" \
           https://api.humhub.com/v1/marketplace/upload?moduleId=testrepo
-          
