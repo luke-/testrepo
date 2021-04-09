@@ -11,23 +11,27 @@ jobs:
     name: Upload Release Asset
     runs-on: ubuntu-latest
     steps:
+
       - name: Checkout code
         uses: actions/checkout@v2
         with: 
           path: 'testrepo'
-      - name: Build project # This would actually build your project, using zip for an example artifact
+
+      - name: Build project
         run: |
           zip -r testrepo.zip testrepo/
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@v2
       
-      - name: Install dependencies with composer
+      - name: Install Composer
         run: cd testrepo; composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
 
-      - name: Install dependencies with composer
+      - name: Install NPM
+        run: cd testrepo; npm install
+
+      - name: Upload Package to HumHub
         run: |
           curl -v \
           -F "key=${{ secrets.API_SECRET }}" \
-          -X POST \
           -F "ModuleVersionUpload[zipFile]=@testrepo.zip" \
           https://api.humhub.com/v1/marketplace/upload?moduleId=testrepo
