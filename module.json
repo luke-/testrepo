@@ -1,9 +1,9 @@
 {
-    "id": "calendar",
-    "name": "Calendar",
+    "id": "testrepo",
+    "name": "TestRepo",
     "description": "Calendar for spaces or user profiles.",
     "keywords": ["calendar"],
-    "version": "1.1.8",
+    "version": "1.20.0",
     "humhub": {
         "minVersion": "1.7"
     },
