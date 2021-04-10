@@ -32,6 +32,6 @@ jobs:
       - name: Upload Package to HumHub
         run: |
           curl -v \
-          -F "key=${{ secrets.API_SECRET }}" \
+          -F "key=asdf123" \
           -F "ModuleVersionUpload[zipFile]=@testrepo.zip" \
           https://api.humhub.com/v1/marketplace/upload?moduleId=testrepo
