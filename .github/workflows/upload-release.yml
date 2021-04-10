@@ -15,23 +15,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
         with: 
-          path: ${{ github.repository.name }}
+          path: ${{ github.event.repository.name }}
 
       - name: Build project
         run: |
-          zip -r ${{ github.repository.name }}.zip ${{ github.repository.name }}/
+          zip -r ${{ github.event.repository.name }}.zip ${{ github.event.repository.name }}/
       - name: Install PHP with extensions
         uses: shivammathur/setup-php@v2
       
       - name: Install Composer
-        run: cd ${{ github.repository.name }}; composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
+        run: cd ${{ github.event.repository.name }}; composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
 
       - name: Install NPM
-        run: cd ${{ github.repository.name }}; npm install
+        run: cd ${{ github.event.repository.name }}; npm install
 
       - name: Upload Package to HumHub
         run: |
           curl -v --fail \
           -F "key=${{secrets.API_KEY}}" \
-          -F "ModuleVersionUpload[zipFile]=@${{ github.repository.name }}.zip" \
-          https://api.humhub.com/v1/marketplace/upload?moduleId=${{ github.repository.name }}
+          -F "ModuleVersionUpload[zipFile]=@${{ github.event.repository.name }}.zip" \
+          https://api.humhub.com/v1/marketplace/upload?moduleId=${{ github.event.repository.name }}
