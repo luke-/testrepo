@@ -31,7 +31,15 @@ jobs:
 
       - name: Upload Package to HumHub
         run: |
-          curl -v \
+          CODE=`curl -v --write-out '%{http_code}' --silent --output /dev/null \
           -F "key=${{secrets.API_KEY}}" \
           -F "ModuleVersionUpload[zipFile]=@testrepo.zip" \
-          https://api.humhub.com/v1/marketplace/upload?moduleId=testrepo
+          https://api.humhub.com/v1/marketplace/upload?moduleId=testrepo`
+          if [ $CODE!="200" ] 
+          then
+              echo "FAILURE"
+              exit 1
+          else
+              echo "SUCCESS"
+              exit 0
+          fi
