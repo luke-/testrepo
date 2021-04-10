@@ -3,7 +3,7 @@
     "name": "TestRepo",
     "description": "Calendar for spaces or user profiles.",
     "keywords": ["calendar"],
-    "version": "1.20.0",
+    "version": "1.20.1",
     "humhub": {
         "minVersion": "1.7"
     },
