@@ -20,9 +20,7 @@ jobs:
       - name: Build project
         run: |
           zip -r ${{ github.event.repository.name }}.zip ${{ github.event.repository.name }}/
-      - name: Install PHP with extensions
-        uses: shivammathur/setup-php@v2
-      
+
       - name: Install Composer
         run: cd ${{ github.event.repository.name }}; composer install --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
 
